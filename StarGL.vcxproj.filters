@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Util">
+      <UniqueIdentifier>{87c7ec80-d585-4073-9e3f-42009d609c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{cfb02406-521e-4bb1-b2b9-4314ed0842f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{0f407bb4-1645-4ffe-973c-ba6797a4f084}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameMap.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CommandConsole.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Globals.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\LightManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\revision.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\buildnum.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameMap.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Globals.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameState.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CommandConsole.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\builddate.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="prometheus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StarGL.rc">
+      <Filter>Util</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

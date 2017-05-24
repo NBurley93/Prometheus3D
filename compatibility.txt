@@ -1,0 +1,4 @@
+- Older ATI cards have compatibility issues with the engine (ATI RADEON HD 3470)
+- Python 3 required to update buildnumber and buildtime for compilation
+- Visual Studio 2015 Required to compile, will likely use codeblocks for x-platform
+- VC++ 2015 Redist required for runtime (for now)

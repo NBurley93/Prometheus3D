@@ -1,0 +1,245 @@
+04/28/17
+	- Added multiple scene items (A well, spinning cardboard cutout)
+	- Added SoundManager with ogg music and wav sfx support
+	- Added ability to play random footstep sound
+	- Added ability to play random jump landing sound
+	- Added animated FP arms with torch
+	- Attached cyborg mesh to player instance
+
+04/06/17
+	- Changed desktop.ini to allow for icon to be displayed as folder to make it easier to spot on the desktop
+	- Cleaned up Renderer to remove references to Mesh (It's essentially a gui renderer for now)
+
+04/05/17
+	- Created dependencies directory
+	- Reimplemented Sprite2D to use the Renderer class
+
+04/04/17
+	- Revision 5
+	- Added date/time buildtime tracking
+
+04/03/17
+	- Minor tweaks to animation code to introduce more assimp way of calculating interpolation and adding scaling calculation to bone local matrices
+
+03/30/17
+	- Removed normal mapping for simplicity's sake
+	- Began implementing multiple lights (needs appside implementation and implementation within light_anim)
+	- Framework for multiple lights finished, added ability to change ambience, diffuse, and specular for map lights
+
+03/29/17
+	- Changed debugMap.mesh to plane.dae for debugging purposes
+
+03/27/17
+	- Very close to actually implementing skeletal animation
+	- Needs to fix dumb bugs related to where the vertices are translating to
+	- Removed hard crash for unfound uniform variables to reduce frustration with crashes
+	- Added PrometheusRender.Renderer
+	- Reformed Material class
+	- Updated icon
+	- Changed build result name to olympus
+	- Added ability to toggle animations
+
+03/26/17
+	- Added vertex weight and bone support
+	- Created light_anim.shader
+	- Rearranged Mesh a little bit
+	- Removed redundant, old animation code
+	- Added PrometheusRender.Bone
+	- Reorganized VS filters in Render
+	- Added PrometheusRender.Skeleton
+	- Added PrometheusRender.Animation
+
+03/25/17
+	- Renamed to Prometheus Engine
+	- Added GameMap
+	- Added map loading
+	- Added sun position and mesh loading to maps
+	- Revision 4
+
+03/24/17
+	- Added temporary specular map for the brick walls
+	- Added debug listing of all uniform variables in a shader (provided debug output is enabled anyways)
+
+03/23/17
+	- Compiled Shadow Demo for 0.0r3
+	- Added version defines to make it easier to change
+	- Added revision define
+	- Added build number tracking
+	- Added python script to autoincrement the build number
+	- Readded original world.dae to make a more interesting world
+
+03/21/17
+	- Finally functional shadow maps for non-normalmapped objects
+	- Added PCF functionality to shadow maps
+	- Added static bias value to prevent shadow acne
+	- Optimized PCF calculations
+	- Added modval and listval commands
+	- Added toggle commands for shadows and normal mapping
+	- Implemented shadowmapping with normal mapping compatibility
+	- Combined light with normalmapping shaders
+	- Added toggle command to show shadow map instead of lighting output
+	- Temporarily removed Bullet Physics code (unused as of now and complicates sharing)
+	- MILESTONE 0.0r3
+
+03/20/17
+	- Moved skybox code into StarRender.Skybox
+	- Began implementing Framebuffer for shadows
+	- Cleaned up Game.cpp clutter and separated drawing into separate methods
+	- Upgraded to NoraShade .shaders
+	- Removed redundant code in ShaderIO relating to Bin ops that were in BinHelper
+	- Kinda sorta got shadow mapping implemented
+
+03/17/17
+	- Added glVersion command to print context version information
+	- Readded test mesh to scene
+
+03/16/17
+	- Added StarGL.Globals
+	- Implemented text input
+	- Console fully implemented
+
+03/15/17
+	- Began implementing Bullet Physics
+	- Created StarCore.PhysWorld
+	- Made minor tweaks to mesh_render.shader
+	- Opted for flat world mesh for shadow and physics testing
+
+03/14/17
+	- Added FP hands and made them orient to the camera's direction
+	- Added test room model, still needs to be properly oriented though
+	- Swapped out brick textures for a more robust version
+	- Placed HCE FP models in for fp placeholder model
+	- Created base implementations for Omni, directional, and spotlight lights
+
+03/13/17
+	- Added Player class and moved camera functionality to Player
+	- Added primitive jumping and gravity to player
+	- Fixed timestep and added StarCore.Timer
+	- Removed vsync for now, and added FPS limiter
+
+03/12/17
+	- Removed tiny_obj_loader and replaced with assimp
+	- Implemented assimp mesh loading
+	- Added StarRender.Model
+	- Reimplemented models to use model instead of mesh
+	- Condensed mesh rendering shaders into one shader
+	- Implemented mouse look
+	- Configured fps camera
+
+03/08/17
+	- Removed references to SDL_TTF and SDL_Image
+	- Readded command console to project, still needs work before it's functional again
+	- Removed references to Freeimage
+	- Added materials gold, obsidian, and emerald to data/material
+	- Added material definition loading
+	- Fixed critical bug in ImageLoader that caused crashes if a tga was loaded without an alpha channel
+
+03/07/17
+	- Added skybox
+	- Fixed "quirks" with the skyboxes
+	- Changed camera into automated orbit camera for demo purposes
+	- Removed key prompts from debug text
+	- Swapped out Freeimage in favor of SOIL (SOIL doesn't break with nearly every TGA unlike Freeimage)
+	- MILESTONE! EARLY DEMO BUILD COMPLETE! 0.0r2
+
+03/05/17
+	- Added Joint, MeshAnimation, MeshAnimator, Keyframe
+
+03/04/17
+	- Fixed 2D ortho coordinates to use top-left as (0,0)
+	- Fixed problems in text renderer relating to changing the ortho matrix's origin point
+	- sprite_2d.shader added
+	- 2D sprite rendering on the screen support added
+	- Modified camera to create and maintain an ortho matrix
+
+03/03/17
+	- Added Bounding box calculations and debug drawing of said bounding box
+	- Reintroduced keeping the .vs dir and VC.db file. (.vs dir prevents project from switching to x64 build when pulling from git)
+
+03/01/17
+	- Reconfigured shader naming convention
+	- Added light shaders with no normal maps and no textures
+	- Added StarRender.ShaderManager
+	- Moved all shader adding code to manager class
+	- Modified mesh and shader usage to make interchanging lighting and texturing modes a breeze
+	- Added ability to toggle lighting, normal mapping, texturing, and wireframe for the model
+
+02/28/17
+	- Removed Vertex3 in favor of a more simple buffer system using glm vectors
+	- Added normal mapping
+	- Added StarRender.StarMath
+	- Replaced broken stormtrooper model with working knight model
+	- Added brick textures and created a ground mesh the be the "ground"
+	- MILESTONE! LIGHTING AND MESH DEMO COMPLETED 0.0r1
+	- Configured Release builds
+	- Built first demo, lighting and obj models
+	- Compiled first demo into zip package, placed within demos
+	- Added placeholder icon for engine
+	- freetype271 integrated to engine
+	- tiny_obj_loader separated into separate project to build as library
+	- StarRender.Font added
+	- Created gui_text.shader
+	- Full TTF font support added
+	- Added support for non-lit rendering for meshes
+	- Added debug information text to the screen
+	- Control information now printed on debug info text
+
+02/27/17
+	- Modified Mesh and Vertex3 to take normal vector coordinates
+	- Added light source cube
+	- Added StarRender.Cube
+	- Added light.shader
+	- Diffuse, specular, and ambient lighting implemented
+	- Added OBJ mesh loader (still a bit tempermental, will need to tweak it)
+	- Added StarRender.MeshLoader
+	- Integrated tinyobjloader into the project
+	- Fixed OBJ mesh loader issue (occured to if the model had no normals or uvs designated for a vertex)
+	- Changed the "sun" to a sphere.obj loaded mesh
+	- TARGA loading capability added
+	- Integrated FreeImage into the project
+	- Added texture displaying on meshes (albiet with some...issues)
+	- Added simple texture shader to facilitate texture debugging
+	- Converted TARGAS to PNG
+	- Ditched TARGA texture loading for PNG
+	- Added well.obj and well.png
+	- Added white.png
+	- Added Stormtrooper.obj and diffuse, normal, and specular maps
+	- Fixed InputManager update bug
+	- Added ability to switch lighting off by hitting enter
+	- Added tinyobjloader to build with StarRender due to VS's tempermental nature with lib files
+	- Added StarRender.Light and StarRender.Material
+	- Added multitexturing with support for Diffuse, normal, and specular maps
+	- Added Stanford dragon model
+
+02/26/17
+	- Changed Mesh over to VAO/VBO rendering with shader capabilities
+	- Added StarRender.GLShader
+	- Added StarCore.ShaderIO
+	- Added TaniaShade to the project
+	- Created color.shader
+	- Added StarCore.InputManager
+	- Added StarRender.ImageLoader
+	- Added StarRender.TextureManager
+	- Added StarRender.GLTexture
+	- Added StarRender.Camera
+	- Introduced the camera into the runtime
+
+02/24/17
+	- Included StarRender to StarGL's input field
+	- Added GLM to project
+	- Created Game class and implemented Window and SDL2
+	- Window loop finished
+	- Created Vertex3
+	- Created Mesh with fixed pipeline rendering for now
+	- Added BinHelper to StarCore
+	- Added CommandConsole to StarGL and removed references to SDL2 Renderer rendering mode
+
+02/23/17
+	- Project created, hello world to StarGL!
+	- Added commit batch file
+	- Added debug build cleaner batch file
+	- Created VS Solution
+	- Added StarRender to handle GL render functionality
+	- Created StarRender.Window
+	- Added SDL2, and GLEW to the project
+	- 0.0r0
