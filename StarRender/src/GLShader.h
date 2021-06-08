@@ -1,5 +1,4 @@
 #pragma once
-#include <GL\glew.h>
 #include <string>
 #include <vector>
 
@@ -12,13 +11,13 @@ public:
 
 	void use();
 	void unuse();
-	GLuint getUniformLocation(const std::string& uniformName);
+	uint32_t getUniformLocation(const std::string& uniformName);
 	static void enableDebugOutput();
 	bool hasAttribute(const std::string& attributeName);
 	bool hasUniform(const std::string& uniformName);
 
 private:
-	GLuint _programID, _vertexID, _fragmentID, _geometryID;
+	uint32_t _programID, _vertexID, _fragmentID, _geometryID;
 	unsigned int _numAttributes;
 
 	static bool _debugOutput;

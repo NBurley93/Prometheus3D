@@ -1,6 +1,7 @@
 #include "GLShader.h"
 #include <ShaderIO.h>
 #include <sstream>
+#include <glad/glad.h>
 
 bool GLShader::_debugOutput = false;
 void GLShader::enableDebugOutput() {
@@ -214,12 +215,12 @@ void GLShader::unuse() {
 	}
 }
 
-GLuint GLShader::getUniformLocation(const std::string& uniformName) {
+uint32_t GLShader::getUniformLocation(const std::string& uniformName) {
 	GLuint loc = glGetUniformLocation(_programID, uniformName.c_str());
 	if (loc == GL_INVALID_INDEX) {
 		printf("[Shader] Uniform %s does not exist in shader\n", uniformName.c_str());
 	}
-	return loc;
+	return static_cast<uint32_t>(loc);
 }
 
 bool GLShader::hasUniform(const std::string& uniformName) {
@@ -227,7 +228,7 @@ bool GLShader::hasUniform(const std::string& uniformName) {
 	if (loc == GL_INVALID_INDEX) {
 		return false;
 	}
-	return loc;
+	return true;
 }
 
 bool GLShader::hasAttribute(const std::string& attributeName) {

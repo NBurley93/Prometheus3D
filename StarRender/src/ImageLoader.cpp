@@ -1,24 +1,26 @@
 #include "ImageLoader.h"
-#include <SOIL.h>
+#include <SOIL/SOIL.h>
+#include <glad/glad.h>
 
 GLTexture* ImageLoader::loadTexture(const char* path) {
-	GLTexture* t = new GLTexture();
-
 	unsigned char* img;
 	int channels;
 
-	img = SOIL_load_image(path, &t->width, &t->height, &channels, SOIL_LOAD_AUTO);
+	int width, height;
 
-	glGenTextures(1, &t->id);
-	glBindTexture(GL_TEXTURE_2D, t->id);
-	if (channels == 4) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->width, t->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
+	img = SOIL_load_image(path, &width, &height, &channels, SOIL_LOAD_AUTO);
+
+	uint32_t texId = 0;
+
+	glGenTextures(1, &texId);
+	glBindTexture(GL_TEXTURE_2D, texId);
+
+	GLenum texFormat = GL_RGBA;
+
+	if (channels == 3) {
+		texFormat = GL_RGB;
 	}
-	else {
-		if (channels == 3) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, t->width, t->height, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
-		}
-	}
+	glTexImage2D(GL_TEXTURE_2D, 0, texFormat, width, height, 0, texFormat, GL_UNSIGNED_BYTE, img);
 
 	//mipmaps
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -28,5 +30,5 @@ GLTexture* ImageLoader::loadTexture(const char* path) {
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	SOIL_free_image_data(img);
-	return t;
+	return new GLTexture(texId, width, height, "");
 }

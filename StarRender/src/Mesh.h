@@ -7,16 +7,17 @@
 
 //Maximum textures = 3
 
+//TODO(nick): Holy shit, refactor this mess
 class Mesh {
 public:
 	Mesh();
 	~Mesh();
 	void AddVertex(glm::vec3 position, glm::vec2 uv, glm::vec3 normal);
-	void AddIndex(GLuint i);
+	void AddIndex(uint32_t i);
 	void DefineBoneAndWeights(unsigned int vertexID, glm::ivec4 bones, glm::vec4 weights);
 
-	GLuint getEBO();
-	GLuint getVAO();
+	uint32_t getEBO();
+	uint32_t getVAO();
 
 	VertexData* getVertexData();
 
@@ -44,5 +45,5 @@ private:
 	glm::vec3 mMin, mMax;
 	glm::mat4 mModelMatrix;
 
-	GLuint mVAO, mVertBuff, mUVBuff, mNormalBuff, mBoneBuffer, mWeightBuffer, mEBO;
+	uint32_t mVAO, mVertBuff, mUVBuff, mNormalBuff, mBoneBuffer, mWeightBuffer, mEBO;
 };

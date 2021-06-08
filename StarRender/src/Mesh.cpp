@@ -71,7 +71,7 @@ VertexData* Mesh::getVertexData() {
 void Mesh::AddTexture(std::string type, std::string path) {
 	GLTexture* t = TextureManager::Get()->getTexture(path);
 	if (t != nullptr) {
-		t->type = type;
+		t->SetType(type);
 		mTextures.push_back(t);
 	}
 }
@@ -169,7 +169,7 @@ void Mesh::RenderMesh(GLShader& shader, bool useIndexing, bool forwardTextures, 
 
 			std::stringstream ss;
 			std::string number;
-			std::string name = mTextures[i]->type;
+			std::string name = mTextures[i]->GetType();
 			if (name == "diffuse") {
 				ss << diffuseNr++;
 			}
@@ -182,7 +182,7 @@ void Mesh::RenderMesh(GLShader& shader, bool useIndexing, bool forwardTextures, 
 
 			glUniform1i(shader.getUniformLocation("material." + name + number), i);
 			glCheckError();
-			glBindTexture(GL_TEXTURE_2D, mTextures[i]->id);
+			glBindTexture(GL_TEXTURE_2D, static_cast<GLuint>(mTextures[i]->GetID()));
 			glCheckError();
 		}
 		glActiveTexture(GL_TEXTURE0);

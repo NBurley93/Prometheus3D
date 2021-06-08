@@ -1,4 +1,5 @@
 #include "Model.h"
+#include <glad/glad.h>
 #include <iostream>
 
 Model::~Model() {
@@ -17,11 +18,11 @@ void Model::Draw(GLShader& shader, bool ForwardTextures, bool UseIndexing, bool 
 	}
 }
 
+//TODO(nick): Refactor this, it's not working atm
 void Model::loadModel(std::string path) {
 	//Use assimp to load a mesh file
 	Assimp::Importer importer;
-	importer.ReadFile(path, aiProcess_ImproveCacheLocality);
-	const aiScene* scene = importer.GetOrphanedScene();
+	const aiScene* scene = importer.ReadFile(path, NULL);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 		std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
@@ -53,18 +54,21 @@ void Model::loadModel(std::string path) {
 			
 
 			//Fill out the children bones
-			std::string pName = FindAiNode(bName)->mParent->mName.data;
+			auto bnode = FindAiNode(bName);
+			if (bnode) {
+				std::string pName = bnode->mParent->mName.data;
 
-			Bone* pBone = FindBone(pName);
+				Bone* pBone = FindBone(pName);
 
-			if (FindBone(pName) == nullptr) {
-				std::cout << "Parent bone for " << bName << " does not exist (null pointer)" << std::endl;
+				if (FindBone(pName) == nullptr) {
+					std::cout << "Parent bone for " << bName << " does not exist (null pointer)" << std::endl;
+				}
+				else {
+					nBone->parentBone = pBone;
+				}
+
+				bones.push_back(nBone);
 			}
-			else {
-				nBone->parentBone = pBone;
-			}
-
-			bones.push_back(nBone);
 		}
 	}
 
@@ -106,6 +110,7 @@ void Model::AddMesh(Mesh* m) {
 	mMeshes.push_back(m);
 }
 
+//TODO(nick): Find out why something goes terribly wrong here
 Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 	Mesh* m = new Mesh();
 	glm::vec3 position, normal, tangent, bitangent;
@@ -134,10 +139,12 @@ Mesh* Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 		m->AddVertex(position, uvs, normal);
 	}
 
-	for (GLuint j = 0; j < mesh->mNumFaces; j++) {
-		aiFace face = mesh->mFaces[j];
-		for (GLuint k = 0; k < face.mNumIndices; k++) {
-			m->AddIndex(face.mIndices[k]);
+	if (mesh->HasFaces()) {
+		for (GLuint j = 0; j < mesh->mNumFaces; j++) {
+			aiFace face = mesh->mFaces[j];
+			for (GLuint k = 0; k < face.mNumIndices; k++) {
+				m->AddIndex(face.mIndices[k]);
+			}
 		}
 	}
 
@@ -231,6 +238,7 @@ aiNode* Model::FindAiNode(std::string name) {
 			return ai_nodes[i];
 		}
 	}
+	return 0;
 }
 
 aiNodeAnim* Model::FindAiNodeAnim(std::string name) {
@@ -239,6 +247,7 @@ aiNodeAnim* Model::FindAiNodeAnim(std::string name) {
 			return ai_nodes_anim[i];
 		}
 	}
+	return 0;
 }
 
 int Model::FindBoneID(std::string name) {

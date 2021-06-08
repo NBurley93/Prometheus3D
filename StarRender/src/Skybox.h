@@ -1,5 +1,4 @@
 #pragma once
-#include <GL/glew.h>
 #include <string>
 #include "Camera.h"
 
@@ -12,7 +11,7 @@ public:
 	void Init();
 	void Render(Camera& cam);
 
-	GLuint getTex() { return mTextureID; }
+	uint32_t getTex() { return mTextureID; }
 private:
-	GLuint mTextureID, mVAO, mVBO;
+	uint32_t mTextureID, mVAO, mVBO;
 };

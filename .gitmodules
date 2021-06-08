@@ -1,0 +1,18 @@
+[submodule "vendor/SDL2"]
+	path = vendor/SDL2
+	url = git@github.com:libsdl-org/SDL.git
+[submodule "vendor/soil"]
+	path = vendor/soil
+	url = git@github.com:paralin/soil.git
+[submodule "vendor/assimp"]
+	path = vendor/assimp
+	url = git@github.com:assimp/assimp.git
+[submodule "vendor/freetype2"]
+	path = vendor/freetype2
+	url = git@github.com:aseprite/freetype2.git
+[submodule "vendor/glad"]
+	path = vendor/glad
+	url = git@github.com:NBurley93/glad.git
+[submodule "vendor/glm"]
+	path = vendor/glm
+	url = git@github.com:g-truc/glm.git

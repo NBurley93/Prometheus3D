@@ -1,6 +1,22 @@
 #include "SoundManager.h"
+#include <SDL_mixer.h>
 
 SoundManager* SoundManager::mInst = nullptr;
+
+bool SoundManager::Init() {
+	if (Mix_Init(MIX_INIT_OGG) < 0) {
+		std::printf("%s\n", Mix_GetError());
+		return false;
+	}
+	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024);
+	Mix_VolumeMusic(10);
+	return true;
+}
+
+void SoundManager::Shutdown() {
+	Mix_CloseAudio();
+	Mix_Quit();
+}
 
 SoundManager* SoundManager::Get() {
 	if (mInst == nullptr) {
@@ -25,7 +41,7 @@ void SoundManager::addSFX(std::string path) {
 	else {
 		//Replace existing
 		SoundFX* mSnd = mit->second;
-		Mix_FreeChunk(mSnd->mData); //Free previous stuff
+		Mix_FreeChunk(reinterpret_cast<Mix_Chunk*>(mSnd->mData)); //Free previous stuff
 		mSnd->mData = Mix_LoadWAV(path.c_str());
 		if (mSnd->mData == NULL) {
 			//Fail
@@ -48,7 +64,7 @@ void SoundManager::addMus(std::string path) {
 	}
 	else {
 		SoundMus* mSnd = mit->second;
-		Mix_FreeMusic(mSnd->mMusic);
+		Mix_FreeMusic(reinterpret_cast<Mix_Music*>(mSnd->mMusic));
 		mSnd->mMusic = Mix_LoadMUS(path.c_str());
 		if (mSnd->mMusic == NULL) {
 			std::printf("Failed to load music: %s\n", path.c_str());
@@ -64,7 +80,7 @@ void SoundManager::playMus(std::string path, bool loop) {
 		if (loop) {
 			lval = -1;
 		}
-		if (Mix_PlayMusic(mit->second->mMusic, lval) == -1) {
+		if (Mix_PlayMusic(reinterpret_cast<Mix_Music*>(mit->second->mMusic), lval) == -1) {
 			std::printf("mixer_playfailure: %s\n", Mix_GetError());
 		}
 		std::printf("boom\n");
@@ -75,7 +91,7 @@ void SoundManager::playSFX(std::string path) {
 	auto mit = mSoundCache.find(path);
 	if (mit != mSoundCache.end()) {
 		//Found it
-		Mix_PlayChannel(-1, mit->second->mData, 0);
+		Mix_PlayChannel(-1, reinterpret_cast<Mix_Chunk*>(mit->second->mData), 0);
 	}
 }
 
@@ -87,13 +103,13 @@ void SoundManager::stopAll() {
 void SoundManager::Clean() {
 	//Clean sfx
 	for (auto mit = mSoundCache.begin(); mit != mSoundCache.end(); mit++) {
-		Mix_FreeChunk(mit->second->mData);
+		Mix_FreeChunk(reinterpret_cast<Mix_Chunk*>(mit->second->mData));
 		delete mit->second;
 	}
 	mSoundCache.clear();
 
 	for (auto mit = mMusicCache.begin(); mit != mMusicCache.end(); mit++) {
-		Mix_FreeMusic(mit->second->mMusic);
+		Mix_FreeMusic(reinterpret_cast<Mix_Music*>(mit->second->mMusic));
 		delete mit->second;
 	}
 	mMusicCache.clear();

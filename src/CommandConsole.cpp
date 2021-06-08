@@ -3,6 +3,7 @@
 #include <Font.h>
 #include "Globals.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <glad/glad.h>
 
 bool CommandConsole::mVisible = false;
 std::map<std::string, console_command> CommandConsole::mCmdList;

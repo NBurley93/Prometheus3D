@@ -1,0 +1,61 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "buildconfig",
+            "type": "pickString",
+            "default": "Debug",
+            "description": "Build configuration",
+            "options": [
+                "Debug",
+                "Release"
+            ]
+        },
+        {
+            "id": "buildjobs",
+            "type": "promptString",
+            "default": "1",
+            "description": "Number of cocurrent build threads"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Generate Projects",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "-j",
+                "${input:buildjobs}",
+                "--config",
+                "${input:buildconfig}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        }
+    ]
+}

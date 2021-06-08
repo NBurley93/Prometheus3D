@@ -1,0 +1,6 @@
+add_subdirectory(assimp)
+add_subdirectory(freetype2)
+add_subdirectory(glad)
+add_subdirectory(SDL2)
+add_subdirectory(soil)
+add_subdirectory(glm)

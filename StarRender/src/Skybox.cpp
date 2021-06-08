@@ -1,8 +1,9 @@
 #include "Skybox.h"
-#include <SOIL.h>
+#include <SOIL/SOIL.h>
 #include <vector>
 #include "ShaderManager.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <glad/glad.h>
 
 Skybox::Skybox() {
 	if (mTextureID == 0) {

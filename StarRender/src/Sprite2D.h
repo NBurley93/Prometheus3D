@@ -32,5 +32,5 @@ private:
 
 	GLTexture* mTexture;
 
-	GLuint mVAO, mVertBuffer, mColorBuffer, mUVBuffer;
+	uint32_t mVAO, mVertBuffer, mColorBuffer, mUVBuffer;
 };

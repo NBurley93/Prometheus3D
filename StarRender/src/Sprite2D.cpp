@@ -1,6 +1,7 @@
 #include "Sprite2D.h"
 #include "ShaderManager.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <glad/glad.h>
 
 Sprite2D::Sprite2D() : mVAO(0), mVertBuffer(0), mModelMatrix(1.0f) {}
 
@@ -169,7 +170,7 @@ void Sprite2D::Draw(Camera& camera, float x, float y, float w, float h) {
 	glUniformMatrix4fv(ShaderManager::Get()->getShdr("sprite_2d")->getUniformLocation("model"), 1, false, glm::value_ptr(mModelMatrix));
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mTexture->id);
+	glBindTexture(GL_TEXTURE_2D, mTexture->GetID());
 
 	glDrawArrays(GL_TRIANGLES, 0, mVertices.size());
 

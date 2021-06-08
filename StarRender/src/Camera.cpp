@@ -1,7 +1,7 @@
 #include "Camera.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 const float CONST_MSPEED = 0.005f;
 
@@ -62,12 +62,12 @@ void Camera::updateVectors() {
 void Camera::update(float dt, InputManager* input) {
 	if (mUseMS) {
 		//Mouse look
-		GLfloat dx, dy;
+		float dx, dy;
 		int mx, my;
 		mx = input->mouse_x();
 		my = input->mouse_y();
-		dx = std::fmod(mx - (mWidth / 2), (GLfloat)360.0f);
-		dy = GLfloat(my - (mHeight / 2));
+		dx = std::fmod(mx - (mWidth / 2), 360.0f);
+		dy = static_cast<float>(my - (mHeight / 2));
 		float sensitivity = 0.01f;
 
 		dx *= sensitivity;

@@ -1,19 +1,21 @@
 #pragma once
-#include <SDL2/SDL_mixer.h>
 #include <string> 
 #include <map>
 
 struct SoundFX {
-	Mix_Chunk* mData;
+	void* mData;
 };
 
 struct SoundMus {
-	Mix_Music* mMusic;
+	void* mMusic;
 };
 
 class SoundManager {
 public:
 	static SoundManager* Get();
+
+	bool Init();
+	void Shutdown();
 
 	void addSFX(std::string path);
 	void addMus(std::string path);

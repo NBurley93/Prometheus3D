@@ -1,4 +1,5 @@
 #include "Light.h"
+#include <glad/glad.h>
 
 Light::Light() {
 	ambient = glm::vec3(1.0f);

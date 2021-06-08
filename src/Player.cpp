@@ -1,5 +1,5 @@
 #include "Player.h"
-#include <SDL2/SDL_keycode.h>
+#include <SDL_keycode.h>
 #include "SoundManager.h"
 
 const float CONST_SPEED = 0.1f;

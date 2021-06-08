@@ -1,6 +1,5 @@
 #pragma once
 //Emit particles, manage them, and draw them in an instanced fasion
-#include <GL/glew.h>
 #include "Particle.h"
 #include <vector>
 #include "TextureManager.h"
